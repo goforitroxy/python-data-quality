@@ -1,8 +1,11 @@
 """Profile a CSV and print a summary."""
+import logging
+import sys
 from pathlib import Path
 
 from data_quality.io import read_csv
 from data_quality.models import RunSummary
+from data_quality.pipeline import run
 from data_quality.transform import normalize_column_names
 from data_quality.validation import count_duplicates, count_nulls, find_missing_columns
 
@@ -26,11 +29,13 @@ def profile(input_path: Path) -> RunSummary:
 
 
 def main() -> None:
-    summary = profile(Path("data/patients.csv"))
-    print(f"rows: {summary.rows}")
-    print(f"columns: {summary.columns}")
-    print(f"nulls: {summary.null_counts}")
-    print(f"duplicate rows: {summary.duplicate_rows}")
+    """Configure logging, run the pipeline, exit non-zero on failure."""
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
+    try:
+        run(Path("data/patients.csv"), Path("output"))
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(1) from exc
 
 
 if __name__ == "__main__":
