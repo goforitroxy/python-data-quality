@@ -11,4 +11,7 @@ class RunSummary:
     columns: list[str]
     null_counts: dict[str, int]
     duplicate_rows: int
-
+    accepted_rows: int = 0
+    rejected_rows: int = 0
+    clean_path: Path | None = None
+    rejects_path: Path | None = None
