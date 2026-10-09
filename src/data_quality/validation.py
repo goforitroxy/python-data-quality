@@ -12,7 +12,7 @@ def find_missing_columns(df: pd.DataFrame, required: list[str]) -> list[str]:
 
 def count_nulls(df: pd.DataFrame) -> dict[str, int]:
     """Map each column to its number of null values."""
-    return {c: int(n) for c, n in df.isna().sum().items()}
+    return {str(c): int(n) for c, n in df.isna().sum().items()}
 
 
 def count_duplicates(df: pd.DataFrame) -> int:
