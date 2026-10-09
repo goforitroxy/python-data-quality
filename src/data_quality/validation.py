@@ -1,5 +1,6 @@
 """Checks that answer: is this data fit to use? No file I/O here."""
 import pandas as pd
+
 from data_quality.contract import Contract
 
 

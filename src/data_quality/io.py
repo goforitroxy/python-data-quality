@@ -1,6 +1,9 @@
 """Reading and writing tabular data. I/O lives here and nowhere else."""
 from pathlib import Path
+
 import pandas as pd
+
+
 def read_csv(path: Path) -> pd.DataFrame:
 
     """Read a CSV file into a DataFrame."""
