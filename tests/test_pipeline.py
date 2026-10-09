@@ -1,4 +1,5 @@
 """End-to-end pipeline tests. tmp_path keeps real files untouched."""
+
 import json
 from pathlib import Path
 

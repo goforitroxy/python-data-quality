@@ -1,4 +1,5 @@
 """Orchestrate a full run: read -> normalize -> validate -> split -> write."""
+
 import json
 import logging
 from dataclasses import asdict
@@ -18,7 +19,9 @@ from data_quality.validation import (
 log = logging.getLogger(__name__)
 
 
-def run(input_path: Path, output_dir: Path, contract: Contract = DEFAULT_CONTRACT) -> RunSummary:
+def run(
+    input_path: Path, output_dir: Path, contract: Contract = DEFAULT_CONTRACT
+) -> RunSummary:
     """Run the full pipeline and return a summary. Raises on bad input."""
     log.info("reading %s", input_path)
     try:
@@ -59,6 +62,11 @@ def run(input_path: Path, output_dir: Path, contract: Contract = DEFAULT_CONTRAC
     )
     summary_path = output_dir / "summary.json"
     summary_path.write_text(json.dumps(asdict(summary), indent=2, default=str))
-    log.info("input=%d accepted=%d rejected=%d", summary.rows, summary.accepted_rows, summary.rejected_rows)
+    log.info(
+        "input=%d accepted=%d rejected=%d",
+        summary.rows,
+        summary.accepted_rows,
+        summary.rejected_rows,
+    )
     log.info("wrote %s %s %s", clean_path, rejects_path, summary_path)
     return summary

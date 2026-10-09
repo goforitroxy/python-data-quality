@@ -1,4 +1,5 @@
 """Shared data structures."""
+
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -6,6 +7,7 @@ from pathlib import Path
 @dataclass
 class RunSummary:
     """Counts and paths describing one profiling run."""
+
     input_path: Path
     rows: int
     columns: list[str]

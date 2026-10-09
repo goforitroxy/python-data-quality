@@ -1,4 +1,5 @@
 """Tests for validation rules: pure functions, no I/O."""
+
 import pandas as pd
 import pytest
 

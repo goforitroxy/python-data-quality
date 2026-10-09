@@ -1,4 +1,5 @@
 """Profile a CSV and print a summary."""
+
 import logging
 import sys
 from pathlib import Path
@@ -30,7 +31,9 @@ def profile(input_path: Path) -> RunSummary:
 
 def main() -> None:
     """Configure logging, run the pipeline, exit non-zero on failure."""
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
+    logging.basicConfig(
+        level=logging.INFO, format="%(levelname)s %(name)s: %(message)s"
+    )
     try:
         run(Path("data/patients.csv"), Path("output"))
     except (FileNotFoundError, ValueError) as exc:

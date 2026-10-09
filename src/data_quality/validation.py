@@ -1,4 +1,5 @@
 """Checks that answer: is this data fit to use? No file I/O here."""
+
 import pandas as pd
 
 from data_quality.contract import Contract
@@ -32,10 +33,10 @@ def reject_reasons(df: pd.DataFrame, contract: Contract) -> pd.Series:
     ]
     for col in contract.date_columns:
         if col in df.columns:
-            parsed = pd.to_datetime(df[col], format=contract.date_format, errors="coerce")
+            parsed = pd.to_datetime(
+                df[col], format=contract.date_format, errors="coerce"
+            )
             checks.append((df[col].notna() & parsed.isna(), f"bad_date:{col}"))
     for mask, reason in checks:
         reasons = reasons.mask(mask & (reasons == ""), reason)
     return reasons
-
-
