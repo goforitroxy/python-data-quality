@@ -27,6 +27,6 @@ disallow_untyped_defs = true
 data-quality = "data_quality.cli:main"
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff", "mypy"]
+dev = ["pytest", "ruff", "mypy", "pandas-stubs"]
 
 
