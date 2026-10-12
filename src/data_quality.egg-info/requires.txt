@@ -1,1 +1,6 @@
 pandas
+
+[dev]
+pytest
+ruff
+mypy
